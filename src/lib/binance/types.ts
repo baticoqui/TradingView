@@ -41,4 +41,5 @@ export interface SymbolInfo {
   baseAsset: string;
   quoteAsset: string;
   status: string;
+  exchange: "BINANCE" | "MEXC";
 }
