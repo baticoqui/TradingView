@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { fetchExchangeSymbols } from "@/lib/binance/rest";
+import { fetchMexcSymbols } from "@/lib/mexc/rest";
 import { useChartStore } from "@/lib/store/chart-store";
 import { cn } from "@/lib/utils";
 import type { SymbolInfo } from "@/lib/binance/types";
@@ -28,7 +29,9 @@ export function SymbolSelector() {
 
   useEffect(() => {
     if (open && allSymbols.length === 0) {
-      fetchExchangeSymbols().then(setAllSymbols).catch(console.error);
+      Promise.all([fetchExchangeSymbols(), fetchMexcSymbols()])
+        .then(([binance, mexc]) => setAllSymbols([...binance, ...mexc]))
+        .catch(console.error);
     }
   }, [open, allSymbols.length]);
 
