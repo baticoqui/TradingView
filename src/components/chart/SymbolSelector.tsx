@@ -94,6 +94,10 @@ export function SymbolSelector() {
                   <span className="text-tv-text-muted">/ {s.quoteAsset}</span>
                 </div>
                 <span className="text-tv-text-muted">{s.symbol}</span>
+                <span className={cn(
+                  "ml-2 rounded px-1.5 py-0.5 text-[10px] font-medium",
+                  s.exchange === "BINANCE" ? "bg-yellow-500/20 text-yellow-400" : "bg-blue-500/20 text-blue-400"
+                )}>{s.exchange}</span>
               </button>
             ))}
           </div>
