@@ -65,14 +65,14 @@ export async function fetchExchangeSymbols(): Promise<SymbolInfo[]> {
   const data = await res.json();
   cachedSymbols = data.symbols
     .filter(
-      (s: { status: string; quoteAsset: string }) =>
-        s.status === "TRADING" && s.quoteAsset === "USDT",
+      (s: { status: string }) => s.status === "TRADING",
     )
     .map((s: { symbol: string; baseAsset: string; quoteAsset: string; status: string }) => ({
       symbol: s.symbol,
       baseAsset: s.baseAsset,
       quoteAsset: s.quoteAsset,
       status: s.status,
+      exchange: "BINANCE",
     }));
   return cachedSymbols!;
 }
